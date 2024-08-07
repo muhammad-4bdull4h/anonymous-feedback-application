@@ -7,6 +7,7 @@ export async function POST(request: Request) {
   await dbConnect();
   try {
     const { username, email, password } = await request.json();
+
     const existingUserVerifiedByUserName = await UserModel.findOne({
       username,
       isVerified: true,
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
       const newUser = new UserModel({
         username,
         email,
-        hashedPassword,
+        password: hashedPassword,
         verifyCode,
         verifyCodeExpiry: expireyDate,
         isVerified: false,
@@ -64,6 +65,7 @@ export async function POST(request: Request) {
       username,
       verifyCode
     );
+
     if (!emailResponse.success) {
       return Response.json(
         {
@@ -86,7 +88,7 @@ export async function POST(request: Request) {
       }
     );
   } catch (error) {
-    console.error("error while registering user");
+    console.error("error while registering user", error);
     return Response.json(
       {
         success: false,
