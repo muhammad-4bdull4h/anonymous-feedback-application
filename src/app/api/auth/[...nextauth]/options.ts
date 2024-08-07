@@ -48,14 +48,26 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  callbacks:{
-    async session({ session, user, token }) {
-        return session
-      },
-      async jwt({ token, user, account, profile, isNewUser }) {
-        return token
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user._id?.toString();
+        token.username = user.username;
+        token.isVerified = user.isVerified;
+        token.isAcceptingMessge = user.isAcceptingMessge;
       }
-  }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user._id = token._id;
+        session.user.isVerified = token.isVerified;
+        session.user.isAcceptingMessge = token.isAcceptingMessge;
+        session.user.username = token.username;
+      }
+      return session;
+    },
+  },
   pages: {
     signIn: "/sign-in",
   },
@@ -63,5 +75,4 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   secret: process.env.NEXT_AUTH_SECRET,
-
 };
