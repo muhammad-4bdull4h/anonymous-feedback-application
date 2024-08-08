@@ -52,7 +52,7 @@ export async function POST(request: Request) {
           message: "Invalid verification code",
         },
         {
-          status: 200,
+          status: 400,
         }
       );
     }

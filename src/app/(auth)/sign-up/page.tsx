@@ -78,7 +78,7 @@ function page() {
       });
       router.replace(`/verify/${username}`);
     } catch (error) {
-      console.log("error while signing uo user", error);
+      console.log("error while signing up user", error);
       const axiosError = error as AxiosError<ApiResponse>;
       let errorMessage = axiosError.response?.data?.message;
       toast({
