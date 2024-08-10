@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -31,8 +31,7 @@ function VerifiAccount() {
         username: params.username,
         code: data.code,
       });
-      console.log("hi" , res);
-      
+
       if (res.data.success) {
         toast({
           title: "Verification Success",

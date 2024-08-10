@@ -9,11 +9,11 @@ export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
   const user: User = session?.user as User;
 
-  if (!session || session.user) {
+  if (!session || !session.user) {
     return Response.json(
       {
         success: false,
-        message: "Not authenticated",
+        message: "Not authenticated!",
       },
       {
         status: 401,
@@ -70,7 +70,7 @@ export async function GET(request: Request) {
   const session = await getServerSession(authOptions);
   const user: User = session?.user as User;
 
-  if (!session || session.user) {
+  if (!session || !session.user) {
     return Response.json(
       {
         success: false,
@@ -101,7 +101,8 @@ export async function GET(request: Request) {
     return Response.json(
       {
         success: true,
-        isAcceptingMessage: foundUser.isAcceptingMessge,
+        isAcceptingMessage:
+          foundUser.isAcceptingMessages || foundUser.isAcceptingMessge,
       },
       {
         status: 200,

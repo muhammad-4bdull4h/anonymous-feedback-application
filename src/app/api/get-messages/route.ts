@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   const session = await getServerSession(authOptions);
   const user: User = session?.user as User;
 
-  if (!session || session.user) {
+  if (!session || !session.user) {
     return Response.json(
       {
         success: false,
@@ -30,10 +30,10 @@ export async function GET(request: Request) {
         $match: { _id: userId },
       },
       {
-        $unwind: "$messeges",
+        $unwind: "$messages",
       },
       {
-        $sort: { "messeges.createdAt": -1 },
+        $sort: { "messages.createdAt": -1 },
       },
       {
         $group: { _id: "$_id", messages: { $push: "$messages" } },
