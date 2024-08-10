@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   try {
     const key = process.env.GEMINAI;
     if (!key) {
