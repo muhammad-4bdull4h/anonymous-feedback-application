@@ -33,22 +33,24 @@ type Messegecardprop = {
 function MessageCard({ message, onMessageDelete }: Messegecardprop) {
   const handleDeleteConfirm = async () => {
     try {
-      const res = axios.delete(`/api/dele-messege/${message._id}`);
+      const res = axios.delete(`/api/delete-message/${message._id}`);
       toast({
         title: "Message deleted",
         description: "Message has been deleted",
       });
       onMessageDelete(message?._id);
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <Card>
       <CardHeader>
-      <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center">
           <CardTitle>{message.content}</CardTitle>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant='destructive'>
+              <Button variant="destructive">
                 <X className="w-5 h-5" />
               </Button>
             </AlertDialogTrigger>
@@ -61,9 +63,7 @@ function MessageCard({ message, onMessageDelete }: Messegecardprop) {
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>
-                  Cancel
-                </AlertDialogCancel>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction onClick={handleDeleteConfirm}>
                   Continue
                 </AlertDialogAction>
