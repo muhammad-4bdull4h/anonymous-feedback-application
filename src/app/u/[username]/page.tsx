@@ -144,14 +144,14 @@ function Page() {
             <CardContent className="flex flex-col space-y-4">
               {suggestedMessagesParser(suggestedMessages).map(
                 (message, idx) => (
-                  <Button
+                  <div
                     key={idx}
-                    variant="outline"
+                    // variant="outline"
                     onClick={() => onMessageClick(message)}
-                    className="mb-2"
+                    className="mb-2 border rounded-lg cursor-pointer hover:bg-blue-50 p-2 flex"
                   >
                     {message}
-                  </Button>
+                  </div>
                 )
               )}
             </CardContent>
