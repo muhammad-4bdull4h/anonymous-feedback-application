@@ -38,7 +38,7 @@ function MessageCard({ message, onMessageDelete }: Messegecardprop) {
         title: "Message deleted",
         description: "Message has been deleted",
       });
-      onMessageDelete(message?._id);
+      onMessageDelete(message?._id as string);
     } catch (error) {
       console.error(error);
     }

@@ -48,10 +48,8 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token._id = user._id?.toString(); // Convert ObjectId to string
         token.isVerified = user.isVerified;
-        token.isAcceptingMessages =
-          user.isAcceptingMessages || user.isAcceptingMessge;
+        token.isAcceptingMessages = user.isAcceptingMessages;
         token.username = user.username;
-        console.log("token is ", token, "user is", user);
       }
 
       return token;
@@ -63,7 +61,6 @@ export const authOptions: NextAuthOptions = {
         session.user.isAcceptingMessages = token.isAcceptingMessages as boolean;
         session.user.username = token.username;
       }
-      // console.log("session is following ", session);
 
       return session;
     },

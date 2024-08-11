@@ -35,7 +35,7 @@ export async function sendVerificationEmail(
         refreshToken: refreshToken,
         accessToken: accessToke,
       },
-    });
+    } as nodemailer.TransportOptions);
 
     const mailOptions = {
       from: "trueFeedBacks <abdullah457tu@gmail.com>",

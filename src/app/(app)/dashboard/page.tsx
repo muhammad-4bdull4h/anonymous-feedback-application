@@ -121,6 +121,8 @@ function Page() {
     }
   };
 
+  const [profileUrl, setProfileUrl] = useState("");
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
     toast({
@@ -130,8 +132,13 @@ function Page() {
   };
 
   const username = session?.user?.username;
-  const basrUrl = `${window?.location.protocol}//${window?.location.host}`;
-  const profileUrl = `${basrUrl}/u/${username}`;
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const basrUrl = `${window?.location.protocol}//${window?.location.host}`;
+      const profileUrl = `${basrUrl}/u/${username}`;
+      setProfileUrl(profileUrl);
+    }
+  }, [username]);
 
   if (!session || !session.user) {
     return <div>Please Login</div>;
