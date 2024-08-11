@@ -22,7 +22,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-function page() {
+function Page() {
   const { username } = useParams();
   const [loader, setLoader] = useState(false);
   const [suggestedMessages, setSuggestedMessages] = useState(
@@ -168,4 +168,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
