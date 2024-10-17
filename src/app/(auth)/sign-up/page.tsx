@@ -76,7 +76,7 @@ function Page() {
         title: "success",
         description: response.data?.message,
       });
-      router.replace(`/verify/${username}`);
+      router.replace(`/sign-in`);
     } catch (error) {
       console.log("error while signing up user", error);
       const axiosError = error as AxiosError<ApiResponse>;

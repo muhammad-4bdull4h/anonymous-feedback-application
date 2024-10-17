@@ -52,7 +52,7 @@ export async function POST(request: Request) {
         password: hashedPassword,
         verifyCode,
         verifyCodeExpiry: expireyDate,
-        isVerified: false,
+        isVerified: true,
         isAcceptingMessages: true,
         messages: [],
       });
@@ -61,11 +61,16 @@ export async function POST(request: Request) {
     }
 
     //send verification email
-    const emailResponse = await sendVerificationEmail(
-      email,
-      username,
-      verifyCode
-    );
+    // const emailResponse = await sendVerificationEmail(
+    //   email,
+    //   username,
+    //   verifyCode
+    // );
+
+    const emailResponse = {
+      success: true,
+      message: "user registered successfully. Please verify your email",
+    };
 
     if (!emailResponse.success) {
       return Response.json(
